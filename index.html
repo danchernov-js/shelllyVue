@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>!DOCTYPE</title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"
+      integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.0/jszip.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+      integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+      crossorigin="anonymous"
+    ></script>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <a class="logo" href="shellly.html">
+      She<span style="color: #fc615d">l</span
+      ><span style="color: #fdbd41">l</span
+      ><span style="color: #34c84a">l</span>y
+    </a>
+    <div
+      id="app"
+      class="browser-window"
+      v-on:dragenter="dragging = true"
+      v-on:dragover="dragging = true"
+      v-on:dragleave="dragging = false"
+      v-on:drop="dragging = false"
+    >
+      <div class="browser-window-header">
+        <div class="browser-window-header-left">
+          <span
+            class="browser-window-header-left_circle-button circle-red"
+          ></span>
+          <span
+            class="browser-window-header-left_circle-button circle-yellow"
+          ></span>
+          <span
+            class="browser-window-header-left_circle-button circle-green"
+          ></span>
+        </div>
+      </div>
+      <div id="drop-area" v-bind:class="{ highlight: dragging }">
+        <form class="my-form">
+          <p>
+            Загрузите изображения с помощью диалога выбора файлов или перетащив
+            нужные изображения в выделенную область
+          </p>
+          <input
+            type="file"
+            id="inp"
+            multiple
+            accept="image/*"
+            v-on:change="handleFiles"
+          />
+          <label class="button" for="inp"> Выбрать изображения </label>
+        </form>
+        <div id="card-container">
+          <div class="card" v-for="item in imageArr">
+            <p class="image-name" v-bind:id="item.cid + '-wrap'"></p>
+            <canvas v-bind:id="item.cid"></canvas>
+          </div>
+        </div>
+      </div>
+      <div
+        class="download-bar"
+        id="download-bar"
+        v-bind:class="{ 'download-bar-highlight': imageArr.length > 0 }"
+      >
+        <button id="download">Загрузить</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
