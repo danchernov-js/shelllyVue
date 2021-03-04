@@ -9,7 +9,7 @@
       integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA=="
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js" integrity="sha512-y3o0Z5TJF1UsKjs/jS2CDkeHN538bWsftxO9nctODL5W40nyXIbs0Pgyu7//icrQY9m6475gLaVr39i/uh/nLA==" crossorigin="anonymous"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
       integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <a class="logo" href="shellly.html">
+    <a class="logo" href="index.html">
       She<span style="color: #fc615d">l</span
       ><span style="color: #fdbd41">l</span
       ><span style="color: #34c84a">l</span>y
@@ -61,10 +61,11 @@
           <label class="button" for="inp"> Выбрать изображения </label>
         </form>
         <div id="card-container">
-          <div class="card" v-for="item in imageArr">
-            <p class="image-name" v-bind:id="item.cid + '-wrap'"></p>
-            <canvas v-bind:id="item.cid"></canvas>
-          </div>
+          <image-preview
+            v-for="item in imageArr"
+            v-bind:itemdata="item"
+            v-bind:key="item.cid"
+          ></image-preview>
         </div>
       </div>
       <div
@@ -72,10 +73,11 @@
         id="download-bar"
         v-bind:class="{ 'download-bar-highlight': imageArr.length > 0 }"
       >
-        <button id="download">Загрузить</button>
+        <button id="download" v-on:click="downloadResult">Загрузить</button>
       </div>
     </div>
 
+    <script src="components/image.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
